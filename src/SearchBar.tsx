@@ -4,7 +4,7 @@ interface SearchBarProps {
   submitSearch: (location: string) => void;
 }
 
-export function SearchBar(props: SearchBarProps) {
+export default function SearchBar(props: SearchBarProps) {
   const [searchLocation, setSearchLocation] = useState("");
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
