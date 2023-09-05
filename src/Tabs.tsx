@@ -1,4 +1,4 @@
-interface TabsProps {
+export interface TabsProps {
   tabOptions: string[];
   selectedTab: string;
 }

@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
+import { Link } from "react-router-dom";
 
-interface SearchBarProps {
+export interface SearchBarProps {
   submitSearch: (location: string) => void;
 }
 
@@ -23,11 +24,13 @@ export default function SearchBar(props: SearchBarProps) {
           id="searchLocation"
           onChange={(e) => setSearchLocation(e.target.value)}
           placeholder="Location"
-          className="mx-auto block text-center px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 mt-2 mb-2"
+          className="searchInput dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
         />
-        <button className="mx-auto block px-4 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
-          Search
-        </button>
+        <Link to={"/search/" + searchLocation}>
+          <button className="searchButton hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+            Search
+          </button>
+        </Link>
       </form>
     </div>
   );

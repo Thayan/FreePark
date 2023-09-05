@@ -1,4 +1,7 @@
-import { ParkingData } from "./App";
+import { useEffect, useState } from "react";
+import { ParkingData } from "./Home";
+import getSearchResults from "./SearchResults";
+import MapIcon from "@mui/icons-material/Map";
 
 interface ResultsTableProps {
   data: ParkingData[];
@@ -6,6 +9,26 @@ interface ResultsTableProps {
 
 export default function ResultsTable(props: ResultsTableProps) {
   const { data } = props;
+  const [parkingSpots, setParkingSpots] = useState<ParkingData[]>(data);
+
+  const getCurrentLocationResults = async () => {
+    const response = await getSearchResults("current location");
+
+    if (!response) {
+      console.log("Failed to get search results");
+      return;
+    }
+    const { data: parkingResults } = response;
+
+    if (parkingResults && parkingResults.length) {
+      setParkingSpots(parkingResults);
+    }
+  };
+
+  useEffect(() => {
+    getCurrentLocationResults();
+  }, [data]);
+
   return (
     <table className="resultsTable dark: divide-gray-700">
       <thead>
@@ -20,15 +43,19 @@ export default function ResultsTable(props: ResultsTableProps) {
         </tr>
       </thead>
       <tbody className="resultsTableBody dark:divide-gray-700 dark:bg-gray-900">
-        {data.map((parkingData) => (
-          <tr key={parkingData.id}>
-            <td className="resultsTableCell">10</td>
-            <td className="resultsTableCell">
-              {parkingData.road_name} {parkingData.road_suffix}
-            </td>
-            <td className="resultsTableCell">icon</td>
-          </tr>
-        ))}
+        {parkingSpots?.map((parkingData) => {
+          return (
+            <tr key={parkingData.id}>
+              <td className="resultsTableCell">10</td>
+              <td className="resultsTableCell">
+                {parkingData.roadName} {parkingData.roadSuffix}
+              </td>
+              <td className="resultsTableCell">
+                <MapIcon />
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
