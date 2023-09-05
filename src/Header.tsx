@@ -15,13 +15,11 @@ export default function Header(props: HeaderProps) {
           <LocationResults location={props.location} />
         </div>
       ) : (
-        <>
-          <SearchPage
-            submitSearch={props.submitSearch}
-            tabOptions={props.tabOptions}
-            selectedTab={props.selectedTab}
-          />
-        </>
+        <SearchPage
+          submitSearch={props.submitSearch}
+          tabOptions={props.tabOptions}
+          selectedTab={props.selectedTab}
+        />
       )}
     </div>
   );

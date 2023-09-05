@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import Header from "./Header";
 import { useState } from "react";
-import getSearchResults from "./SearchResults";
 import ResultsTitle from "./ResultsTitle";
 import ResultsTable from "./ResultsTable";
 import { ParkingData } from "./Home";
@@ -19,7 +18,7 @@ export default function ResultsPage(props: ResultsPageProps) {
   const [location, setLocation] = useState(params.location);
 
   return (
-    <>
+    <div>
       <div className="mx-auto w-4/5">
         <Header
           submitSearch={props.submitSearch}
@@ -30,6 +29,6 @@ export default function ResultsPage(props: ResultsPageProps) {
         <ResultsTitle title={parkingSpots.length ? location! : selectedTab} />
         <ResultsTable data={parkingSpots} />
       </div>
-    </>
+    </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ParkingData } from "./Home";
 import getSearchResults from "./SearchResults";
-import Map from "@mui/icons-material/Map";
+import MapIcon from "@mui/icons-material/Map";
 
 interface ResultsTableProps {
   data: ParkingData[];
@@ -14,8 +14,10 @@ export default function ResultsTable(props: ResultsTableProps) {
   const getCurrentLocationResults = async () => {
     const response = await getSearchResults("current location");
 
-    if (!response) return;
-
+    if (!response) {
+      console.log("Failed to get search results");
+      return;
+    }
     const { data: parkingResults } = response;
 
     if (parkingResults && parkingResults.length) {
@@ -49,7 +51,7 @@ export default function ResultsTable(props: ResultsTableProps) {
                 {parkingData.roadName} {parkingData.roadSuffix}
               </td>
               <td className="resultsTableCell">
-                <Map />
+                <MapIcon />
               </td>
             </tr>
           );
